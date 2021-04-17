@@ -100,13 +100,18 @@ setTimeout(() => {
             e.target.parentElement.parentElement.style.display = "none";
             chrome.storage.sync.get("wordsData", function(wordsData) {
                 let words = wordsData.wordsData;
-
+                
                 for (let i = 0; i < deleteBtns.length; i++) {
                     if (e.target = deleteBtns[i]) {
                         var index = i;
                     }
                 }
-                console.log(words);
+                
+                if (deleteBtns.length == 1) {
+                    chrome.storage.sync.set({"wordsData": []})
+                    return;
+                }
+
                 words = words.splice(index,1);
                 chrome.storage.sync.set({"wordsData": words})
             })    

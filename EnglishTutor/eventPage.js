@@ -1,7 +1,7 @@
 // context menu options
 var contextMenuItem = {
-    "id": "getWord",
-    "title": "getWord",
+    "id": "Search Word",
+    "title": "Search Word",
     "contexts": ["selection"]
 };
 // making the context menu appear on right click
@@ -13,7 +13,7 @@ var words = [];
 
 // adding an event listener for right click
 chrome.contextMenus.onClicked.addListener(function(clickedData) {
-    if (clickedData.menuItemId == "getWord" && clickedData.selectionText) {
+    if (clickedData.menuItemId == "Search Word" && clickedData.selectionText) {
 
         var inList = false;
         let word = getSearchableWord(clickedData.selectionText)
