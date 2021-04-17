@@ -106,6 +106,7 @@ setTimeout(() => {
                         var index = i;
                     }
                 }
+                console.log(words);
                 words = words.splice(index,1);
                 chrome.storage.sync.set({"wordsData": words})
             })    

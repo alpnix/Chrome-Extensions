@@ -18,9 +18,6 @@ chrome.contextMenus.onClicked.addListener(function(clickedData) {
         var inList = false;
         let word = getSearchableWord(clickedData.selectionText)
         let date = new Date().toLocaleDateString();
-        function checkAlreadyInList(el) {
-            return el.word !== word;
-        }
 
         for (const wordObj of words) {
             if (word == wordObj.word) {
