@@ -1,0 +1,37 @@
+{
+    "manifest_version": 2,
+    "name": "Color Changer",
+    "version": "1.0",
+    "description": "This extension helps you change the text color on Youtube and Wikipedia",
+    "icons": {
+        "128": "icons/icon128.png",
+        "48": "icons/icon48.png",
+        "16": "icons/icon16.png" 
+    },
+
+    "page_action": {
+        "default_icon": "icons/icon16.png",
+        "default_popup": "popup.html",
+        "default_title": "PageFontStyle"
+    },
+
+    "background": {
+        "scripts": ["js/eventPage.js"],
+        "persistent": false
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["https://developer.chrome.com/*","https://www.youtube.com/*","https://en.wikipedia.org/*"],
+            "js": ["js/content.js","js/jquery-3.1.0.min.js","js/jscolor.js"],
+            "css": ["css/content.css"]
+        }
+    ],
+
+    "permissions": [
+        "tabs",
+        "https://developer.chrome.com/*",
+        "https://www.youtube.com/*",
+        "https://en.wikipedia.org/*"
+    ]
+}
