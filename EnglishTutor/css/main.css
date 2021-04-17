@@ -4,12 +4,30 @@
     box-sizing: border-box;
     font-family: Zen Dotes;
 }
+*::selection {
+    background: yellow; /* WebKit/Blink Browsers */
+}  
+a {
+    text-decoration: none;
+    color: white;
+}
+a::selection, button::selection, img::selection {
+    background-color: cadetblue;
+}
+button {
+    color: white;
+    border: none;
+}
 :root {
     --padding: 10px 30px;
 }
 body {
     background-color: black;
     width: 400px;
+    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 #header {
     padding: var(--padding);
@@ -21,19 +39,18 @@ body {
 #header a {
     display: flex;
     align-items: center;
-    color: white;
     justify-content: space-evenly;
-    text-decoration: none;
     font-size: 20px;
-    min-width: 35vw;
-    max-width: 40vw;
+    width: 200px;
 }
 .boxes {
+    padding-top: 100px;
     padding: var(--padding);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    flex: 1;
 }
 .box {
     width: 98%;
@@ -67,4 +84,17 @@ body {
 }
 .box .def {
     font-size: 13px;
+}
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+.btn {
+    padding: 3px 8px;
+}
+.delete {
+    background: red;
+}
+.more-info {
+    background: dodgerblue;
 }
