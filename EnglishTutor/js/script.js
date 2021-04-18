@@ -119,3 +119,38 @@ setTimeout(() => {
     }
 },1600)
 
+// get new word on form submit
+const form = document.getElementById("searchWord");
+const wordInput = document.getElementById("word");
+
+form.addEventListener("submit", (e) => {
+    let word = getSearchableWord(wordInput.value);
+    let searchedAt = new Date().toLocaleDateString();
+    chrome.storage.sync.get(["wordsData"], (results) => {
+        let wordsData = results.wordsData; 
+        let inList = false;
+
+        for (let i=0; i<wordsData.length; i++) {
+            if (wordsData[i].word == word) {
+                inList = true;
+            }
+        }
+        console.log(wordsData);
+        console.log(inList);
+        if (word && !inList) {
+            wordsData.push({
+                word: word,
+                date: searchedAt
+            });
+        }
+        chrome.storage.sync.set({"wordsData": wordsData});
+
+    })
+})
+
+function getSearchableWord(text) {
+    let searchable = text.trim();
+    searchable = searchable.replace(" ", "-");
+
+    return searchable;
+}
