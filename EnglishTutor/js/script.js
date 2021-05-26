@@ -127,21 +127,32 @@ form.addEventListener("submit", (e) => {
     let word = getSearchableWord(wordInput.value);
     let searchedAt = new Date().toLocaleDateString();
     chrome.storage.sync.get(["wordsData"], (results) => {
-        let wordsData = results.wordsData; 
-        let inList = false;
+        var wordsData = results.wordsData; 
+        if (wordsData) {
 
-        for (let i=0; i<wordsData.length; i++) {
-            if (wordsData[i].word == word) {
-                inList = true;
+            let inList = false;
+
+            for (let i=0; i<wordsData.length; i++) {
+                if (wordsData[i].word == word) {
+                    inList = true;
+                }
+            }
+            console.log(wordsData);
+            console.log(inList);
+            if (word && !inList) {
+                wordsData.push({
+                    word: word,
+                    date: searchedAt
+                });
             }
         }
-        console.log(wordsData);
-        console.log(inList);
-        if (word && !inList) {
-            wordsData.push({
-                word: word,
-                date: searchedAt
-            });
+        else {
+            var wordsData = [
+                {
+                    word: word,
+                    date: searchedAt
+                }
+            ]
         }
         chrome.storage.sync.set({"wordsData": wordsData});
 
